@@ -32,6 +32,11 @@ android {
     }
 }
 
+ext {
+    v_rss = "3.1.1"
+    v_koin = "2.2.2"
+}
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -42,4 +47,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation("com.prof.rssparser:rssparser:$v_rss")
+    implementation("org.koin:koin-androidx-viewmodel:${v_koin}")
+    implementation("org.koin:koin-android:$v_koin")
 }
