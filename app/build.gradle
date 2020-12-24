@@ -35,6 +35,7 @@ android {
 ext {
     v_rss = "3.1.1"
     v_koin = "2.2.2"
+    v_okhttp = "4.9.0"
 }
 
 dependencies {
@@ -51,4 +52,5 @@ dependencies {
     implementation("com.prof.rssparser:rssparser:$v_rss")
     implementation("org.koin:koin-androidx-viewmodel:${v_koin}")
     implementation("org.koin:koin-android:$v_koin")
+    implementation("com.squareup.okhttp3:okhttp:$v_okhttp")
 }

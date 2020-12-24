@@ -16,6 +16,6 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>(){
     }
 
     override fun setupView() {
-
+        viewModel.loadRssData()
     }
 }

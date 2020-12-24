@@ -10,11 +10,17 @@ import org.koin.dsl.module
  */
 object AppModule {
 
-    private val feedModule = module {
-        viewModel {
-            FeedActivityViewModel()
+    private val parserModule = module {
+        single {
+            RssParserModule.rssParser
         }
     }
 
-    var modules = listOf(feedModule)
+    private val feedModule = module {
+        viewModel {
+            FeedActivityViewModel(get())
+        }
+    }
+
+    var modules = listOf(feedModule, parserModule)
 }
