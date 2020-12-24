@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RSSFeed</string>
+    <string name="default_url">https://news.am/arm/rss/</string>
 </resources>

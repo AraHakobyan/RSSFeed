@@ -1,4 +1,4 @@
-package am.develop.rssfeed.base
+package am.develop.rssfeed.base.view_model
 
 import androidx.lifecycle.ViewModel
 

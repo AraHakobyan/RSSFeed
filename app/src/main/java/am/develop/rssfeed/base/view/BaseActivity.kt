@@ -1,6 +1,6 @@
 package am.develop.rssfeed.base.view
 
-import am.develop.rssfeed.base.BaseActivityViewModel
+import am.develop.rssfeed.base.view_model.BaseActivityViewModel
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity

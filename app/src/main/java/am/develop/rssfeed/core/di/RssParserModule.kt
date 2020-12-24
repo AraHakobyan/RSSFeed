@@ -7,5 +7,14 @@ import com.prof.rssparser.Parser
  * Company IDT
  */
 object RssParserModule {
-    val rssParser: Parser = Parser.Builder().build()
+
+    private var rssParser: Parser? = null
+
+    val rssParserInstance: Parser
+        get() {
+            if (rssParser == null) {
+                rssParser = Parser.Builder().build()
+            }
+            return rssParser!!
+        }
 }
