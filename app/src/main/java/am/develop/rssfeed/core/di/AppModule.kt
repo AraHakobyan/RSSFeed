@@ -1,7 +1,6 @@
 package am.develop.rssfeed.core.di
 
 import am.develop.rssfeed.R
-import am.develop.rssfeed.application.feed.FeedActivity
 import am.develop.rssfeed.application.feed.FeedActivityViewModel
 import am.develop.rssfeed.application.feed.FeedRepository
 import am.develop.rssfeed.core.db.RssDb
@@ -27,20 +26,26 @@ object AppModule {
 
     private val parserModule = module {
         single {
-            RssParserModule.rssParserInstance
+            RssParserModule.getRssParserInstance(get())
+        }
+    }
+
+    private val httpClientModule = module {
+        single {
+            HttpClientModule.getHttpClient(get())
         }
     }
 
     private val feedModule = module {
 
         viewModel {
-            FeedActivityViewModel(get(), androidContext().resources.getString(R.string.default_url))
+            FeedActivityViewModel(get())
         }
 
         single {
-            FeedRepository(get(), get())
+            FeedRepository(get(), get(), androidContext().resources.getString(R.string.default_url))
         }
     }
 
-    var modules = listOf(feedModule, parserModule, dbModule)
+    var modules = listOf(feedModule, parserModule, dbModule, httpClientModule)
 }

@@ -11,7 +11,7 @@ import androidx.room.TypeConverters
  * Created by Ara Hakobyan on 12/24/2020.
  * Company IDT
  */
-@Database(entities = [RssFeedInfoModelDb::class, ArticleModelDb::class],version = 1,exportSchema = true)
+@Database(entities = [RssFeedInfoModelDb::class, ArticleModelDb::class],version = 3,exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class RssDb: RoomDatabase(){
 

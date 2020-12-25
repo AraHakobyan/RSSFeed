@@ -12,7 +12,7 @@ import com.prof.rssparser.Image
 @Entity
 data class RssFeedInfoModelDb(
     @PrimaryKey
-    val url: String,
+    val id: String,
     val title: String? = null,
     val link: String? = null,
     val description: String? = null,
@@ -21,7 +21,7 @@ data class RssFeedInfoModelDb(
     val updatePeriod: String? = null
 ) {
     constructor(url: String, channel: Channel) : this(
-        url = url,
+        id = url,
         title = channel.title,
         link = channel.link,
         description = channel.description,

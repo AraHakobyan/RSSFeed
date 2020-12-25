@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">RSSFeed</string>
     <string name="default_url">https://news.am/arm/rss/</string>
+    <string name="text_ok">OK</string>
+    <string name="error_message_unknown">Something went wrong, please try again</string>
+    <string name="error_message_no_internet">No internet available, please check your connected WIFi or Data</string>
+    <string name="error_message_no_network">No network available, please check your WiFi or Data connection</string>
 </resources>

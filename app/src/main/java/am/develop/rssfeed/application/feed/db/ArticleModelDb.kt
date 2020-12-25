@@ -3,6 +3,7 @@ package am.develop.rssfeed.application.feed.db
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.prof.rssparser.Article
+import java.util.*
 
 /**
  * Created by Ara Hakobyan on 12/24/2020.
@@ -10,9 +11,8 @@ import com.prof.rssparser.Article
  */
 @Entity
 data class ArticleModelDb(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val url: String,
+    @PrimaryKey
+    val id: String,
     var guid: String? = null,
     var title: String? = null,
     var author: String? = null,
@@ -27,8 +27,8 @@ data class ArticleModelDb(
     var sourceUrl: String? = null,
     var categories: List<String>
 ) {
-    constructor(url: String, data: Article) : this(
-        url = url,
+    constructor(data: Article) : this(
+        id = (data.title + data.sourceName + data.description + data.guid).toLowerCase(Locale.getDefault()),
         guid = data.guid,
         title = data.title,
         author = data.author,

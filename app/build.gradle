@@ -56,6 +56,7 @@ dependencies {
     implementation("org.koin:koin-androidx-viewmodel:${v_koin}")
     implementation("org.koin:koin-android:$v_koin")
     implementation("com.squareup.okhttp3:okhttp:$v_okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor:$v_okhttp")
     kapt "androidx.room:room-compiler:$v_room"
     implementation ("androidx.room:room-ktx:$v_room")
     implementation("com.google.code.gson:gson:$v_gson")

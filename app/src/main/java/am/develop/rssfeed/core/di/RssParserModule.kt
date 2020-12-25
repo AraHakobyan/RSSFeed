@@ -1,6 +1,7 @@
 package am.develop.rssfeed.core.di
 
 import com.prof.rssparser.Parser
+import okhttp3.OkHttpClient
 
 /**
  * Created by Ara Hakobyan on 12/23/2020.
@@ -10,10 +11,9 @@ object RssParserModule {
 
     private var rssParser: Parser? = null
 
-    val rssParserInstance: Parser
-        get() {
+    fun getRssParserInstance(okHttpClient: OkHttpClient): Parser{
             if (rssParser == null) {
-                rssParser = Parser.Builder().build()
+                rssParser = Parser.Builder(okHttpClient = okHttpClient).build()
             }
             return rssParser!!
         }
