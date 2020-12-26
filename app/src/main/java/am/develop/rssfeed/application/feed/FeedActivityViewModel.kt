@@ -4,6 +4,8 @@ import am.develop.rssfeed.application.feed.db.ArticleModelDb
 import am.develop.rssfeed.base.view_model.BaseActivityViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagedList
+import androidx.paging.toLiveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -17,7 +19,7 @@ class FeedActivityViewModel(
     private val feedRepository: FeedRepository
 ) : BaseActivityViewModel() {
 
-    var articlesLiveData: LiveData<List<ArticleModelDb>?> = feedRepository.getArticlesLiveData()
+    var articlesLiveData: LiveData<PagedList<ArticleModelDb>> = feedRepository.getArticles().toLiveData(pageSize = 10)
 
     fun loadRssData() {
         viewModelScope.launch(Dispatchers.IO) {

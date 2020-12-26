@@ -5,6 +5,7 @@ import am.develop.rssfeed.application.feed.db.ArticleModelDb
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 class FeedAdapter : PagedListAdapter<ArticleModelDb, FeedAdapter.ViewHolder>(DIFF_UTIL){
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
+        private val title = itemView.findViewById<AppCompatTextView>(R.id.feed_item_title)
+        private val date = itemView.findViewById<AppCompatTextView>(R.id.feed_item_date)
+
         fun initData(data: ArticleModelDb?){
             data?.let {
-
+                title.text = data.title
+                date.text = data.pubDate
             }
         }
     }

@@ -1,6 +1,7 @@
 package am.develop.rssfeed.application.feed.db
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 
 /**
@@ -20,5 +21,5 @@ interface RssInfoDao {
     fun getRssInfoModel(url: String): LiveData<RssFeedInfoModelDb?>
 
     @Query("select *from ArticleModelDb")
-    fun getArticles(): LiveData<List<ArticleModelDb>?>
+    fun getArticles(): DataSource.Factory<Int, ArticleModelDb>
 }
