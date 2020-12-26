@@ -7,4 +7,4 @@ import com.prof.rssparser.Article
  * Created by Ara Hakobyan on 12/24/2020.
  * Company IDT
  */
-fun List<Article>.asDbModel(url: String): List<ArticleModelDb> = map { ArticleModelDb(url, it) }
+fun List<Article>.asDbModel(): List<ArticleModelDb> = map { ArticleModelDb(it) }

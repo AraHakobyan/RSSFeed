@@ -3,9 +3,12 @@ package am.develop.rssfeed.application.feed
 import am.develop.rssfeed.application.feed.db.ArticleModelDb
 import am.develop.rssfeed.base.view_model.BaseActivityViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagedList
+import androidx.paging.toLiveData
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 /**
@@ -13,20 +16,22 @@ import kotlinx.coroutines.launch
  * Company IDT
  */
 class FeedActivityViewModel(
-    private val feedRepository: FeedRepository,
-    private val defaultUrl: String
+    private val feedRepository: FeedRepository
 ) : BaseActivityViewModel() {
-    private val rssUrlLiveData: MutableLiveData<String> = MutableLiveData()
-    var articlesLiveData: LiveData<List<ArticleModelDb>?> = getArticles()
 
-    fun loadRssData(url: String = defaultUrl) {
-        rssUrlLiveData.value = url
-        articlesLiveData = getArticles()
+    var articlesLiveData: LiveData<PagedList<ArticleModelDb>> = feedRepository.getArticles().toLiveData(pageSize = 10)
+
+    fun loadRssData() {
         viewModelScope.launch(Dispatchers.IO) {
-            feedRepository.getFeedItems(url)
+            while (isActive){
+                feedRepository.getFeedItems(errorLiveData)
+                delay(REQUEST_DELAY)
+            }
         }
     }
 
-    private fun getArticles() =
-        feedRepository.getArticlesLiveData(url = rssUrlLiveData.value ?: defaultUrl)
+    companion object{
+        /** Delay for make request to get rss info every minute*/
+        private const val REQUEST_DELAY = 1000L
+    }
 }
