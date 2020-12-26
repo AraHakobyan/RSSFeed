@@ -16,6 +16,10 @@ import com.prof.rssparser.Parser
  */
 class FeedRepository(private val rssParser: Parser, private val rssInfoDao: RssInfoDao, private val defaultUrl: String) {
 
+    /**
+     * get feed items
+     * save into local db
+     */
     suspend fun getFeedItems(errorLiveData: MutableLiveData<@ErrorTypes String>)  {
         try {
             val channel: Channel = rssParser.getChannel(defaultUrl)

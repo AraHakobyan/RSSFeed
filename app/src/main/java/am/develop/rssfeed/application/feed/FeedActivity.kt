@@ -11,7 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
  * Created by Ara Hakobyan on 12/23/2020.
  * Company IDT
  */
-class FeedActivity : BaseActivity<FeedActivityViewModel>(){
+class FeedActivity : BaseActivity<FeedActivityViewModel>() {
     override fun onCreateView(): Int = R.layout.activity_feed
 
     override fun initViewModel() {
@@ -20,14 +20,20 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>(){
 
     override fun initObservers() {
         super.initObservers()
-        viewModel.articlesLiveData.observe(this, Observer (::onArticlesFetched))
+        viewModel.articlesLiveData.observe(this, Observer(::onArticlesFetched))
     }
 
     override fun setupView() {
         viewModel.loadRssData()
+        initFeedRecyclerView()
+
     }
 
-    private fun onArticlesFetched(items: List<ArticleModelDb>?){
+    private fun initFeedRecyclerView() {
+
+    }
+
+    private fun onArticlesFetched(items: List<ArticleModelDb>?) {
         Toast.makeText(this, "${items?.size}", Toast.LENGTH_LONG).show()
     }
 }
