@@ -2,7 +2,8 @@ package am.develop.rssfeed.application.feed.activity
 
 import am.develop.rssfeed.R
 import am.develop.rssfeed.application.feed.adapter.FeedAdapter
-import am.develop.rssfeed.application.feed.db.ArticleModelDb
+import am.develop.rssfeed.application.feed.adapter.MockedFeedAdapter
+import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
 import am.develop.rssfeed.base.view.BaseActivity
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
@@ -17,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class FeedActivity : BaseActivity<FeedActivityViewModel>() {
 
     private val feedAdapter: FeedAdapter by lazy { FeedAdapter() }
+    private val mockedFeedAdapter: MockedFeedAdapter by lazy { MockedFeedAdapter(items = viewModel.loadMockedRssData()) }
 
     override fun onCreateView(): Int = R.layout.activity_feed
 
@@ -58,12 +60,12 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>() {
 
     private fun onToggleStateChanged(isChecked: Boolean) {
         if (isChecked){
+            feedRv.adapter = feedAdapter
             viewModel.articlesLiveData.value?.let {
                 onArticlesFetched(it)
             }
         } else {
-            val items = viewModel.loadMockedRssData()
-            feedAdapter.submitList(items)
+            feedRv.adapter = mockedFeedAdapter
         }
     }
 }

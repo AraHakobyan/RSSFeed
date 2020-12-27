@@ -1,8 +1,8 @@
 package am.develop.rssfeed.core.db
 
-import am.develop.rssfeed.application.feed.db.ArticleModelDb
-import am.develop.rssfeed.application.feed.db.RssFeedInfoModelDb
-import am.develop.rssfeed.application.feed.db.RssInfoDao
+import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
+import am.develop.rssfeed.application.feed.data.db.RssFeedInfoModelDb
+import am.develop.rssfeed.application.feed.data.db.RssInfoDao
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters

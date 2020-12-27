@@ -1,7 +1,7 @@
 package am.develop.rssfeed.application.feed.repository
 
-import am.develop.rssfeed.application.feed.db.RssFeedInfoModelDb
-import am.develop.rssfeed.application.feed.db.RssInfoDao
+import am.develop.rssfeed.application.feed.data.db.RssFeedInfoModelDb
+import am.develop.rssfeed.application.feed.data.db.RssInfoDao
 import am.develop.rssfeed.base.types.ErrorTypes
 import am.develop.rssfeed.core.extensions.asDbModel
 import am.develop.rssfeed.core.extensions.toErrorType

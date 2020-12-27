@@ -1,32 +1,17 @@
 package am.develop.rssfeed.application.feed.adapter
 
 import am.develop.rssfeed.R
-import am.develop.rssfeed.application.feed.db.ArticleModelDb
+import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by Ara Hakobyan on 12/27/2020.
  * Company IDT
  */
-class FeedAdapter : PagedListAdapter<ArticleModelDb, FeedAdapter.ViewHolder>(DIFF_UTIL){
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-
-        private val title = itemView.findViewById<AppCompatTextView>(R.id.feed_item_title)
-        private val date = itemView.findViewById<AppCompatTextView>(R.id.feed_item_date)
-
-        fun initData(data: ArticleModelDb?){
-            data?.let {
-                title.text = data.title
-                date.text = data.pubDate
-            }
-        }
-    }
+class FeedAdapter : PagedListAdapter<ArticleModelDb, FeedViewHolder>(DIFF_UTIL){
 
     companion object {
         val DIFF_UTIL = object :DiffUtil.ItemCallback<ArticleModelDb>(){
@@ -43,12 +28,12 @@ class FeedAdapter : PagedListAdapter<ArticleModelDb, FeedAdapter.ViewHolder>(DIF
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.feed_item, parent, false)
-        return ViewHolder(view)
+        return FeedViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         holder.initData(getItem(position))
     }
 }

@@ -1,6 +1,6 @@
 package am.develop.rssfeed.core.extensions
 
-import am.develop.rssfeed.application.feed.db.ArticleModelDb
+import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
 import com.prof.rssparser.Article
 
 /**

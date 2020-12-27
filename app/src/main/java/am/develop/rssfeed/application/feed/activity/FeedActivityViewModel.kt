@@ -1,6 +1,7 @@
 package am.develop.rssfeed.application.feed.activity
 
-import am.develop.rssfeed.application.feed.db.ArticleModelDb
+import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
+import am.develop.rssfeed.application.feed.data.mocked.MockedFeedItemModel
 import am.develop.rssfeed.application.feed.repository.FeedRepository
 import am.develop.rssfeed.application.feed.repository.MockedFeedRepository
 import am.develop.rssfeed.base.view_model.BaseActivityViewModel
@@ -41,13 +42,13 @@ class FeedActivityViewModel(
        loadRssJob.start()
     }
 
-    fun loadMockedRssData(): PagedList<ArticleModelDb>? {
+    fun loadMockedRssData(): List<MockedFeedItemModel> {
         return mockedFeedRepository.loadMockedData(articlesLiveData)
     }
 
     companion object {
         /** Delay for make request to get rss info every minute*/
-        private const val REQUEST_DELAY = 1000L //TODO change second to minute
+        private const val REQUEST_DELAY = 1000L * 60
         private const val FEED_LOADING_PAGE_SIZE = 10
     }
 }

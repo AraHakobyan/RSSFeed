@@ -1,4 +1,4 @@
-package am.develop.rssfeed.application.feed.db
+package am.develop.rssfeed.application.feed.data.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

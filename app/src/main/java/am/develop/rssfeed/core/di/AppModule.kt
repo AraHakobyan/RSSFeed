@@ -6,6 +6,7 @@ import am.develop.rssfeed.application.feed.repository.FeedRepository
 import am.develop.rssfeed.application.feed.repository.MockedFeedRepository
 import am.develop.rssfeed.core.db.RssDb
 import androidx.room.Room
+import com.google.gson.Gson
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -37,6 +38,12 @@ object AppModule {
         }
     }
 
+    private val gsonModule = module {
+        single {
+            Gson()
+        }
+    }
+
     private val feedModule = module {
 
         viewModel {
@@ -47,8 +54,8 @@ object AppModule {
             FeedRepository(get(), get(), androidContext().resources.getString(R.string.default_url))
         }
 
-        single { MockedFeedRepository() }
+        single { MockedFeedRepository(androidContext().resources.assets.open("RSSMockedData.json"), get()) }
     }
 
-    var modules = listOf(feedModule, parserModule, dbModule, httpClientModule)
+    var modules = listOf(feedModule, parserModule, dbModule, httpClientModule, gsonModule)
 }
