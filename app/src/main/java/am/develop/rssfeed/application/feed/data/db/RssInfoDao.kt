@@ -1,4 +1,4 @@
-package am.develop.rssfeed.application.feed.db
+package am.develop.rssfeed.application.feed.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
