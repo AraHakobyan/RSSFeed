@@ -1,4 +1,4 @@
-package am.develop.rssfeed.application.feed
+package am.develop.rssfeed.application.feed.repository
 
 import am.develop.rssfeed.application.feed.db.RssFeedInfoModelDb
 import am.develop.rssfeed.application.feed.db.RssInfoDao

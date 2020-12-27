@@ -1,8 +1,9 @@
 package am.develop.rssfeed.core.di
 
 import am.develop.rssfeed.R
-import am.develop.rssfeed.application.feed.FeedActivityViewModel
-import am.develop.rssfeed.application.feed.FeedRepository
+import am.develop.rssfeed.application.feed.activity.FeedActivityViewModel
+import am.develop.rssfeed.application.feed.repository.FeedRepository
+import am.develop.rssfeed.application.feed.repository.MockedFeedRepository
 import am.develop.rssfeed.core.db.RssDb
 import androidx.room.Room
 import org.koin.android.ext.koin.androidContext
@@ -39,12 +40,14 @@ object AppModule {
     private val feedModule = module {
 
         viewModel {
-            FeedActivityViewModel(get())
+            FeedActivityViewModel(get(), get())
         }
 
         single {
             FeedRepository(get(), get(), androidContext().resources.getString(R.string.default_url))
         }
+
+        single { MockedFeedRepository() }
     }
 
     var modules = listOf(feedModule, parserModule, dbModule, httpClientModule)

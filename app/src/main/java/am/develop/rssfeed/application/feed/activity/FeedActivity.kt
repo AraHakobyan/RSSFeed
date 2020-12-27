@@ -1,4 +1,4 @@
-package am.develop.rssfeed.application.feed
+package am.develop.rssfeed.application.feed.activity
 
 import am.develop.rssfeed.R
 import am.develop.rssfeed.application.feed.adapter.FeedAdapter
@@ -27,6 +27,7 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>() {
     override fun initObservers() {
         super.initObservers()
         viewModel.articlesLiveData.observe(this, Observer(::onArticlesFetched))
+        viewModel.toggleCheckedLiveData.observe(this, Observer(::onToggleStateChanged))
     }
 
     override fun setupView() {
@@ -36,8 +37,8 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>() {
     }
 
     private fun initSourceToggleButton() {
-        sourceSwitcher.run {
-
+        sourceSwitcher.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.toggleCheckedLiveData.value = isChecked
         }
     }
 
@@ -50,6 +51,19 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>() {
     }
 
     private fun onArticlesFetched(items: PagedList<ArticleModelDb>) {
-        feedAdapter.submitList(items)
+        if (viewModel.toggleCheckedLiveData.value == true){
+            feedAdapter.submitList(items)
+        }
+    }
+
+    private fun onToggleStateChanged(isChecked: Boolean) {
+        if (isChecked){
+            viewModel.articlesLiveData.value?.let {
+                onArticlesFetched(it)
+            }
+        } else {
+            val items = viewModel.loadMockedRssData()
+            feedAdapter.submitList(items)
+        }
     }
 }
