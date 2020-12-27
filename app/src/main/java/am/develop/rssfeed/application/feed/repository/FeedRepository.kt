@@ -38,5 +38,7 @@ class FeedRepository(private val rssParser: Parser, private val rssInfoDao: RssI
         rssInfoDao.insertArticlesModel(*articles.asDbModel().toTypedArray())
     }
 
+    fun getArticlesInfo() = rssInfoDao.getRssInfoModel()
+
     fun getArticles() = rssInfoDao.getArticles()
 }

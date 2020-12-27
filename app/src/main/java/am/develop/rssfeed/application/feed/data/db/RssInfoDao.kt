@@ -17,8 +17,8 @@ interface RssInfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticlesModel(vararg articles: ArticleModelDb)
 
-    @Query("select *from RssFeedInfoModelDb where id = :url")
-    fun getRssInfoModel(url: String): LiveData<RssFeedInfoModelDb?>
+    @Query("select *from RssFeedInfoModelDb")
+    fun getRssInfoModel(): LiveData<List<RssFeedInfoModelDb>>
 
     @Query("select *from ArticleModelDb")
     fun getArticles(): DataSource.Factory<Int, ArticleModelDb>

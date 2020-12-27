@@ -60,10 +60,12 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>() {
 
     private fun onToggleStateChanged(isChecked: Boolean) {
         if (isChecked) {
+            title = viewModel.articlesInfoLiveData.value?.get(0)?.id
             feedRv.adapter = feedAdapter
             viewModel.articlesLiveData.value?.let(::onArticlesFetched)
         } else {
             feedRv.adapter = mockedFeedAdapter
+            title = viewModel.mockedFeedModelLiveData.value?.feed?.title
         }
     }
 }
