@@ -1,7 +1,7 @@
 package am.develop.rssfeed.application.feed.activity
 
 import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
-import am.develop.rssfeed.application.feed.data.mocked.MockedFeedItemModel
+import am.develop.rssfeed.application.feed.data.mocked.MockedRssDataModel
 import am.develop.rssfeed.application.feed.repository.FeedRepository
 import am.develop.rssfeed.application.feed.repository.MockedFeedRepository
 import am.develop.rssfeed.base.view_model.BaseActivityViewModel
@@ -24,6 +24,9 @@ class FeedActivityViewModel(
     val toggleCheckedLiveData: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
         value = true
     }
+    val mockedFeedModelLiveData: MutableLiveData<MockedRssDataModel> = MutableLiveData<MockedRssDataModel>().apply {
+        value =  mockedFeedRepository.loadMockedData()
+    }
     var articlesLiveData: LiveData<PagedList<ArticleModelDb>> =
         feedRepository.getArticles().toLiveData(pageSize = FEED_LOADING_PAGE_SIZE)
 
@@ -31,19 +34,15 @@ class FeedActivityViewModel(
         initLoadRssJob()
     }
 
-    private fun initLoadRssJob() : Job = viewModelScope.launch {
-            while (isActive) {
-                feedRepository.getFeedItems(errorLiveData)
-                delay(REQUEST_DELAY)
-            }
+    private fun initLoadRssJob(): Job = viewModelScope.launch {
+        while (isActive) {
+            feedRepository.getFeedItems(errorLiveData)
+            delay(REQUEST_DELAY)
         }
-
-    fun loadRssData() {
-       loadRssJob.start()
     }
 
-    fun loadMockedRssData(): List<MockedFeedItemModel> {
-        return mockedFeedRepository.loadMockedData(articlesLiveData)
+    fun loadRssData() {
+        loadRssJob.start()
     }
 
     companion object {

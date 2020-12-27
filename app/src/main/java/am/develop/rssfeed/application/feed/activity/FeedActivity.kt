@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class FeedActivity : BaseActivity<FeedActivityViewModel>() {
 
     private val feedAdapter: FeedAdapter by lazy { FeedAdapter() }
-    private val mockedFeedAdapter: MockedFeedAdapter by lazy { MockedFeedAdapter(items = viewModel.loadMockedRssData()) }
+    private val mockedFeedAdapter: MockedFeedAdapter by lazy { MockedFeedAdapter(items = viewModel.mockedFeedModelLiveData.value?.items) }
 
     override fun onCreateView(): Int = R.layout.activity_feed
 
@@ -53,17 +53,15 @@ class FeedActivity : BaseActivity<FeedActivityViewModel>() {
     }
 
     private fun onArticlesFetched(items: PagedList<ArticleModelDb>) {
-        if (viewModel.toggleCheckedLiveData.value == true){
+        if (viewModel.toggleCheckedLiveData.value == true) {
             feedAdapter.submitList(items)
         }
     }
 
     private fun onToggleStateChanged(isChecked: Boolean) {
-        if (isChecked){
+        if (isChecked) {
             feedRv.adapter = feedAdapter
-            viewModel.articlesLiveData.value?.let {
-                onArticlesFetched(it)
-            }
+            viewModel.articlesLiveData.value?.let(::onArticlesFetched)
         } else {
             feedRv.adapter = mockedFeedAdapter
         }

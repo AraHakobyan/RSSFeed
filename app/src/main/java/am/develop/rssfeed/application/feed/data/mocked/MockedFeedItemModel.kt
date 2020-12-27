@@ -1,6 +1,5 @@
 package am.develop.rssfeed.application.feed.data.mocked
 
-import am.develop.rssfeed.core.utils.EMPTY
 import android.os.Parcelable
 import androidx.annotation.Keep
 import kotlinx.android.parcel.Parcelize
