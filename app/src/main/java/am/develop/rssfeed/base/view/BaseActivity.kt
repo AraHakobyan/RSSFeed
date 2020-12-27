@@ -40,7 +40,7 @@ abstract class BaseActivity<VIEW_MODEL : BaseActivityViewModel> : AppCompatActiv
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show()
     }
 
-    private fun onError(@ErrorTypes errorTypes: String){
+    private fun onError(@ErrorTypes errorTypes: String?){
         when(errorTypes){
             ErrorTypes.ERROR_TYPE_NO_NETWORK_AVAILABLE -> {
                 showInfoMessage(message = getString(R.string.error_message_no_network))
@@ -52,5 +52,10 @@ abstract class BaseActivity<VIEW_MODEL : BaseActivityViewModel> : AppCompatActiv
                 showInfoMessage(message = getString(R.string.error_message_unknown))
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.clearErrorInfo()
     }
 }

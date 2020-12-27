@@ -24,10 +24,11 @@ class FeedActivityViewModel(
     val toggleCheckedLiveData: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
         value = true
     }
-    val mockedFeedModelLiveData: MutableLiveData<MockedRssDataModel> = MutableLiveData<MockedRssDataModel>().apply {
-        value =  mockedFeedRepository.loadMockedData()
-    }
-    var articlesLiveData: LiveData<PagedList<ArticleModelDb>> =
+    val mockedFeedModelLiveData: MutableLiveData<MockedRssDataModel> =
+        MutableLiveData<MockedRssDataModel>().apply {
+            value = mockedFeedRepository.loadMockedData()
+        }
+    val articlesLiveData: LiveData<PagedList<ArticleModelDb>> =
         feedRepository.getArticles().toLiveData(pageSize = FEED_LOADING_PAGE_SIZE)
 
     private val loadRssJob: Job by lazy {
@@ -36,7 +37,7 @@ class FeedActivityViewModel(
 
     private fun initLoadRssJob(): Job = viewModelScope.launch {
         while (isActive) {
-            feedRepository.getFeedItems(errorLiveData)
+            feedRepository.getFeedItems(if (toggleCheckedLiveData.value == true) errorLiveData else null)
             delay(REQUEST_DELAY)
         }
     }

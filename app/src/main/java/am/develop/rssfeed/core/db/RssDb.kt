@@ -1,7 +1,6 @@
 package am.develop.rssfeed.core.db
 
 import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
-import am.develop.rssfeed.application.feed.data.db.RssFeedInfoModelDb
 import am.develop.rssfeed.application.feed.data.db.RssInfoDao
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -11,7 +10,7 @@ import androidx.room.TypeConverters
  * Created by Ara Hakobyan on 12/24/2020.
  * Company IDT
  */
-@Database(entities = [RssFeedInfoModelDb::class, ArticleModelDb::class],version = 3,exportSchema = true)
+@Database(entities = [ArticleModelDb::class],version = 4,exportSchema = true)
 @TypeConverters(Converters::class)
 abstract class RssDb: RoomDatabase(){
 
