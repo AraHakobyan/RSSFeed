@@ -1,0 +1,61 @@
+{
+  "status": "ok",
+  "feed": {
+    "url": "https://news.ycombinator.com/rss",
+    "title": "Hacker News",
+    "link": "https://news.ycombinator.com/",
+    "author": "",
+    "description": "Links for the intellectually curious, ranked by readers.",
+    "image": ""
+  },
+  "items": [
+    {
+      "title": "Introduction to Reinforcement Learning with David Silver",
+      "pubDate": "2020-12-27 09:33:25",
+      "link": "https://deepmind.com/learning-resources/-introduction-reinforcement-learning-david-silver",
+      "guid": "07c5d0cda55d0ee571312b8b41d25fbf",
+      "author": "",
+      "thumbnail": "",
+      "description": "",
+      "content": "",
+      "enclosure": {},
+      "categories": []
+    },
+    {
+      "title": "API pagination design",
+      "pubDate": "2020-12-27 00:38:53",
+      "link": "https://solovyov.net/blog/2020/api-pagination-design/",
+      "guid": "ee351aafa844027d6e34d910b3e673be",
+      "author": "",
+      "thumbnail": "",
+      "description": "",
+      "content": "",
+      "enclosure": {},
+      "categories": []
+    },
+    {
+      "title": "API pagination design 1 ",
+      "pubDate": "2020-12-27 00:38:53",
+      "link": "https://solovyov.net/blog/2020/api-pagination-design/1",
+      "guid": "ee151aafa844027d6e34d910b3e673be1",
+      "author": "",
+      "thumbnail": "",
+      "description": "",
+      "content": "",
+      "enclosure": {},
+      "categories": []
+    },
+    {
+      "title": "API pagination design 2 ",
+      "pubDate": "2020-12-27 00:38:53",
+      "link": "https://solovyov.net/blog/2020/api-pagination-design/2",
+      "guid": "ee451aafa844027d6e34d910b3e673be2",
+      "author": "",
+      "thumbnail": "",
+      "description": "",
+      "content": "",
+      "enclosure": {},
+      "categories": []
+    }
+  ]
+}

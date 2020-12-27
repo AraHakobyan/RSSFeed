@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -32,6 +34,15 @@ android {
     }
 }
 
+ext {
+    v_rss = "3.1.1"
+    v_koin = "2.2.2"
+    v_okhttp = "4.9.0"
+    v_room = "2.2.6"
+    v_gson = "2.8.6"
+    v_paging = "2.1.2"
+}
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -39,7 +50,17 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation("com.prof.rssparser:rssparser:$v_rss")
+    implementation("org.koin:koin-androidx-viewmodel:${v_koin}")
+    implementation("org.koin:koin-android:$v_koin")
+    implementation("com.squareup.okhttp3:okhttp:$v_okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor:$v_okhttp")
+    kapt "androidx.room:room-compiler:$v_room"
+    implementation ("androidx.room:room-ktx:$v_room")
+    implementation("com.google.code.gson:gson:$v_gson")
+    implementation("androidx.paging:paging-runtime-ktx:$v_paging")
 }
