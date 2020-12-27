@@ -18,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class FeedActivity : BaseActivity<FeedActivityViewModel>() {
 
     private val feedAdapter: FeedAdapter by lazy { FeedAdapter() }
-    private val mockedFeedAdapter: MockedFeedAdapter by lazy { MockedFeedAdapter(items = viewModel.loadMockedRssData()) }
+    private val mockedFeedAdapter: MockedFeedAdapter by lazy { MockedFeedAdapter(items = viewModel.mockedFeedModelLiveData.value?.items) }
 
     override fun onCreateView(): Int = R.layout.activity_feed
 

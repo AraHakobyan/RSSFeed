@@ -23,8 +23,8 @@ class FeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    fun initData(data: MockedFeedItemModel) {
-        title.text = data.title
-        date.text = data.pubDate
+    fun initData(data: MockedFeedItemModel?) {
+        title.text = data?.title
+        date.text = data?.pubDate
     }
 }
