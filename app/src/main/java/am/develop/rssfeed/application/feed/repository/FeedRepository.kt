@@ -1,6 +1,5 @@
 package am.develop.rssfeed.application.feed.repository
 
-import am.develop.rssfeed.application.feed.data.db.RssFeedInfoModelDb
 import am.develop.rssfeed.application.feed.data.db.RssInfoDao
 import am.develop.rssfeed.base.types.ErrorTypes
 import am.develop.rssfeed.core.extensions.asDbModel
@@ -16,29 +15,18 @@ import com.prof.rssparser.Parser
  */
 class FeedRepository(private val rssParser: Parser, private val rssInfoDao: RssInfoDao, private val defaultUrl: String) {
 
-    /**
-     * get feed items
-     * save into local db
-     */
-    suspend fun getFeedItems(errorLiveData: MutableLiveData<@ErrorTypes String>)  {
+    suspend fun getFeedItems(errorLiveData: MutableLiveData<@ErrorTypes String?>? = null)  {
         try {
             val channel: Channel = rssParser.getChannel(defaultUrl)
-            updateFeedInfoModel(RssFeedInfoModelDb(defaultUrl, channel))
             updateArticles(channel.articles)
         }catch (ex: Exception){
-            errorLiveData.postValue(ex.toErrorType())
+            errorLiveData?.postValue(ex.toErrorType())
         }
-    }
-
-    private suspend fun updateFeedInfoModel(data: RssFeedInfoModelDb) {
-        rssInfoDao.insertRssInfoModel(data)
     }
 
     private suspend fun updateArticles(articles: List<Article>) {
         rssInfoDao.insertArticlesModel(*articles.asDbModel().toTypedArray())
     }
-
-    fun getArticlesInfo() = rssInfoDao.getRssInfoModel()
 
     fun getArticles() = rssInfoDao.getArticles()
 }

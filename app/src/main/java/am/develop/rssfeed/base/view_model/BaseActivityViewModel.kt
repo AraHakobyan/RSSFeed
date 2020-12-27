@@ -8,5 +8,9 @@ import androidx.lifecycle.MutableLiveData
  * Company IDT
  */
 open class BaseActivityViewModel : BaseViewModel() {
-    val errorLiveData: MutableLiveData<@ErrorTypes String> = MutableLiveData()
+    val errorLiveData: MutableLiveData<@ErrorTypes String?> = MutableLiveData()
+
+    fun clearErrorInfo() {
+        errorLiveData.value = null
+    }
 }

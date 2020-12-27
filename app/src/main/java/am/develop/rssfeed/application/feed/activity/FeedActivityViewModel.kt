@@ -1,7 +1,6 @@
 package am.develop.rssfeed.application.feed.activity
 
 import am.develop.rssfeed.application.feed.data.db.ArticleModelDb
-import am.develop.rssfeed.application.feed.data.db.RssFeedInfoModelDb
 import am.develop.rssfeed.application.feed.data.mocked.MockedRssDataModel
 import am.develop.rssfeed.application.feed.repository.FeedRepository
 import am.develop.rssfeed.application.feed.repository.MockedFeedRepository
@@ -25,13 +24,12 @@ class FeedActivityViewModel(
     val toggleCheckedLiveData: MutableLiveData<Boolean> = MutableLiveData<Boolean>().apply {
         value = true
     }
-    val mockedFeedModelLiveData: MutableLiveData<MockedRssDataModel> = MutableLiveData<MockedRssDataModel>().apply {
-        value =  mockedFeedRepository.loadMockedData()
-    }
+    val mockedFeedModelLiveData: MutableLiveData<MockedRssDataModel> =
+        MutableLiveData<MockedRssDataModel>().apply {
+            value = mockedFeedRepository.loadMockedData()
+        }
     val articlesLiveData: LiveData<PagedList<ArticleModelDb>> =
         feedRepository.getArticles().toLiveData(pageSize = FEED_LOADING_PAGE_SIZE)
-
-    val articlesInfoLiveData: LiveData<List<RssFeedInfoModelDb>> = feedRepository.getArticlesInfo()
 
     private val loadRssJob: Job by lazy {
         initLoadRssJob()
@@ -39,7 +37,7 @@ class FeedActivityViewModel(
 
     private fun initLoadRssJob(): Job = viewModelScope.launch {
         while (isActive) {
-            feedRepository.getFeedItems(errorLiveData)
+            feedRepository.getFeedItems(if (toggleCheckedLiveData.value == true) errorLiveData else null)
             delay(REQUEST_DELAY)
         }
     }
